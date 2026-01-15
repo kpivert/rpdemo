@@ -50,3 +50,28 @@ standardize_sex <- function(x) {
 
   return(standardized)
 }
+
+#' Read laboratory data
+#'
+#' Read laboratory data from a file
+#'
+#' @param file A file path
+#'
+#' @returns A data frame
+#' @export
+#'
+#' @examples
+#' fp <- system.file("extdata/rped.csv", package = "rpdemo", mustWork = TRUE)
+#' read_labdata(fp)
+#'
+read_labdata <- function(file) {
+  readr::read_csv(
+    file,
+    col_types = readr::cols(
+      sex = readr::col_character(),
+      age = readr::col_integer(),
+      zip = readr::col_character(),
+      .default = readr::col_guess()
+    )
+  )
+}
